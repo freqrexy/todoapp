@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+</head>
+
+<body>
+    <div>
+        <h1>To Do List</h1>
+        {% for todo in todo_list %}
+        <form action="/edit/{{todo.id}}" method="post">
+            <div>
+                <h2>{{todo.task}}</h2>
+                    {% if todo.complete==False %}
+                <p>Date allocated: {{todo.date}} ❌</p>
+                    {% else %}
+                <p>Date allocated: {{todo.date}} ✅</p>
+                    {% endif %}
+                    {% if todo.deadlinetrue==False %}
+                <p>Deadline assigned: ❌</p>
+                    {% else %}
+                <p>Deadline assigned: ✅</p>
+                    {% endif %}
+                <input type="text" name="edit_todo" placeholder="Edit task?">
+                <button class="button" type="submit">Edit</button>
+            </div>
+        </form>
+        <div>
+            {% if todo.complete==False %}
+                <form action="/update/{{todo.id}}" method="post">
+                    <button class="button" type="submit">Mark as complete</button>
+                </form>
+            {% else %}
+            <form action="/update/{{todo.id}}" method="post">
+                <button class="button" type="submit">Undo complete</button>
+            </form>
+            {% endif %}
+        </div>
+        <p><a href="/delete/{{todo.id}}">Delete Task?</a></p>
+        {% endfor %}
+        <form action="/add" method="post">
+            <div>
+                <label>Todo task</label>
+                <input type="text" name="task" placeholder="Enter a Task">
+                <input type="checkbox" id="deadlinetrue" name="deadlinetrue" value="true">
+                <label for="deadlinetrue"> Deadline?</label><br>
+                <button class="button" type="submit">Add a Task</button>
+            </div>
+            {% if message %}
+                <p>{{message}}</p>
+            {% endif %}
+        </form>
+        <hr>
+    </div>
+</body>
+
+</html>

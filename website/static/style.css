@@ -1,0 +1,45 @@
+body{
+    background-image:linear-gradient(to right,rgb(31, 31, 31),rgb(60, 60, 60));
+    color:white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin: 2%; 
+    padding: 0; 
+    width: fit-content;
+}
+p {
+    color:aqua;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:18px;
+}
+h1 {
+    font-family:'Courier New', Courier, monospace;
+    text-align:center
+}
+h2 {
+    font-family:'Courier New', Courier, monospace;
+    text-align:center
+}
+a:link {
+    color: rgb(0, 166, 255);
+}
+  
+
+a:visited {
+    color: rgb(45, 174, 210);
+}
+
+a:hover {
+    color: rgb(255, 255, 110);
+}
+input[type=text] {
+    border: 2px solid rgb(91, 159, 255);
+    border-radius: 4px;
+}
+.button {
+    background-color: #0412aa; /* Green */
+    border: 2px solid white;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
