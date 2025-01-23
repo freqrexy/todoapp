@@ -43,3 +43,17 @@ input[type=text] {
     text-decoration: none;
     display: inline-block;
 }
+section {
+    height:95vh;
+    border: 2px solid gray
+}
+.list {
+    background-color: rgba(128, 128, 128, .4);
+    width: 48%;
+    display: inline-block;
+}
+.input {
+    background-color: rgba(128,255,255, .4);
+    width: 48%;
+    display: inline-block;
+}

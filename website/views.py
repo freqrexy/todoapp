@@ -15,13 +15,14 @@ def home():
 def add():
 #    try:
         task = request.form.get("task")
+        category = request.form.get("category")
         today = datetime.today()
         endtrue = request.form.get("deadlinetrue")
         deadlinetrue = False
         if endtrue == "true":
             deadlinetrue = True
-#        new_todo = Todo(task=task, date=today.strftime("%Y-%m-%d"))
-        new_todo = Todo(task=task, date=today.strftime("%Y-%m-%d"), deadlinetrue=deadlinetrue)
+        deadline = request.form.get("deadline")
+        new_todo = Todo(task=task, category=category, date=today.strftime("%Y-%m-%d"), deadlinetrue=deadlinetrue, deadline=deadline)
         db.session.add(new_todo)
         db.session.commit()
         message = "Task added successfully."
