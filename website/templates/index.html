@@ -44,39 +44,43 @@
                 </form>
             </div>
             <div class = "list">
-                <h1>To Do List</h1>
-                {% for todo in todo_list %}
-                <form action="/edit/{{todo.id}}" method="post">
-                    <div>
-                        <h2>{{todo.task}}</h2>
-                        <h3>{{todo.category}}</h3>
-                            {% if todo.complete==False %}
-                        <p>Date allocated: {{todo.date}} ❌</p>
-                            {% else %}
-                        <p>Date allocated: {{todo.date}} ✅</p>
-                            {% endif %}
-                            {% if todo.deadlinetrue==False %}
-                        <p>Deadline assigned: ❌</p>
-                            {% else %}
-                        <p>Deadline assigned: {{todo.deadline}}</p>
-                            {% endif %}
-                        <input type="text" name="edit_todo" placeholder="Edit task?">
-                        <button class="button" type="submit">Edit</button>
-                    </div>
-                </form>
-                <div>
-                    {% if todo.complete==False %}
-                        <form action="/update/{{todo.id}}" method="post">
-                            <button class="button" type="submit">Mark as complete</button>
-                        </form>
-                    {% else %}
-                    <form action="/update/{{todo.id}}" method="post">
-                        <button class="button" type="submit">Undo complete</button>
-                    </form>
-                    {% endif %}
+                <div class = "header">
+                    <h1>To Do List</h1>
                 </div>
-                <p><a href="/delete/{{todo.id}}">Delete Task?</a></p>
-                {% endfor %}
+                <div class = "tasks">
+                    {% for todo in todo_list %}
+                    <form action="/edit/{{todo.id}}" method="post">
+                        <div>
+                            <h2>{{todo.task}}</h2>
+                            <h3>{{todo.category}}</h3>
+                                {% if todo.complete==False %}
+                            <p>Date allocated: {{todo.date}} ❌</p>
+                                    {% else %}
+                            <p>Date allocated: {{todo.date}} ✅</p>
+                                {% endif %}
+                                {% if todo.deadlinetrue==False %}
+                            <p>Deadline assigned: ❌</p>
+                                {% else %}
+                            <p>Deadline assigned: {{todo.deadline}}</p>
+                                {% endif %}
+                            <input type="text" name="edit_todo" placeholder="Edit task?">
+                            <button class="button" type="submit">Edit</button>
+                        </div>
+                    </form>
+                    <div>
+                        {% if todo.complete==False %}
+                            <form action="/update/{{todo.id}}" method="post">
+                                <button class="button" type="submit">Mark as complete</button>
+                            </form>
+                        {% else %}
+                        <form action="/update/{{todo.id}}" method="post">
+                            <button class="button" type="submit">Undo complete</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                    <p><a href="/delete/{{todo.id}}">Delete Task?</a></p>
+                    {% endfor %}
+                </div>
             </div>
         </section>
     </div>
