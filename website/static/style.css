@@ -32,7 +32,6 @@ h3 {
 a:link {
     color: rgb(0, 166, 255);
 }
-  
 
 a:visited {
     color: rgb(45, 174, 210);
@@ -59,18 +58,22 @@ section {
     display:flex;
     justify-content:space-between;
 }
+
+/* The section above was needed to fit in both the Input form and the List in separate Div boxes.
+    Both have different classes as seen below, to separate the two of them.
+    Extra time would've meant the idea of changing the layout with different media queries.
+    As of right now, the layout is more optimized for Desktop / Horizontal, rather than any vertical screens. */
+
 .list {
     background-color: rgba(128, 128, 128, .4);
     width: 48%;
     text-align:center;
-    /* display: inline-block; */
 }
 .input {
     background-color: rgba(128,255,255, .4);
     width: 48%;
     height:30vh;
     text-align: center;
-    /* display: inline-block; */
 }
 .header {
     background-color: rgba(200,200,200, .4)

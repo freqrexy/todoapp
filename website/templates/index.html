@@ -17,6 +17,12 @@
     </script>
 </head>
 
+<!-- The Head tags has some Javascript code in it to work in conjunction with the deadline text box on the HTML proper.
+        It follows a value from a checkbox, assigned to "deadlinetrue".
+        If the checkbox is not disabled, only then will the text box activate itself, or focus.
+        One thing that would be cool to add in the future is some blanking out of dates in the past.
+        But that will require a lot more JavaScript related research. -->
+
 <body>
     <div>
         <section>
@@ -33,9 +39,15 @@
                             <option value="Other">Other</option>
                         </select>
                         <br>
+
+<!-- Category selection above is represented by a drop down box, showcasing several pre-selected options.-->
+
                         <label for="deadlinetrue"> Deadline?</label>
                         <input type="checkbox" id="deadlinetrue" name="deadlinetrue" value="true" onclick="EnableDisableTextBox(this)">
                         <input type="date" id="deadline" name="deadline" disabled="disabled" />
+
+<!-- As mentioned above, a checkbox combined with a text box operates the Deadline related variables. -->
+
                         <button class="button" type="submit">Add a Task</button>
                     </div>
                     {% if message %}
@@ -43,6 +55,9 @@
                     {% endif %}
                 </form>
             </div>
+
+<!-- On the right hand page according to the CSS, the task list will display.  -->
+
             <div class = "list">
                 <div class = "header">
                     <h1>To Do List</h1>
@@ -67,6 +82,9 @@
                             <button class="button" type="submit">Edit</button>
                         </div>
                     </form>
+
+<!-- All tasks are listed via this For loop here.  Presentation would depend entirely on the CSS coding.  -->
+
                     <div>
                         {% if todo.complete==False %}
                             <form action="/update/{{todo.id}}" method="post">
@@ -78,6 +96,9 @@
                         </form>
                         {% endif %}
                     </div>
+
+<!-- There is some accident handling with the Undo button, in case one thinks they've done a task but actually had not.-->
+
                     <p><a href="/delete/{{todo.id}}">Delete Task?</a></p>
                     {% endfor %}
                 </div>

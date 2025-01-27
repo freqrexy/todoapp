@@ -11,6 +11,10 @@ def home():
     message = request.args.get("message",None)
     return render_template("index.html", todo_list=todo_list, message=message)
 
+# In the below Add route, most variables are taken from the form get funciton on the HTML page.
+# The only exception is datetime.today(), which always returns today's date and requires the Datetime library to work.
+# Deadlinetrue starts as false, but needs a separate value from the form and an If loop to return the boolean value.
+
 @my_view.route("/add", methods=["POST"])
 def add():
     try:
@@ -31,6 +35,9 @@ def add():
         message = "There was an error adding your task.  Please try again."
         return redirect(url_for("my_view.home",message=message))
 
+    # One thing I'd like to do with more time is varying up what errors were made user-side, so that I know what to fix.
+    # This will require more outside research into error handling proceedings.
+
 @my_view.route("/edit/<todo_id>", methods=["POST"])
 def edit(todo_id):
     try:
@@ -44,6 +51,9 @@ def edit(todo_id):
         message = "There was an error editing your task.  Please try again."
         return redirect(url_for("my_view.home",message=message))
 
+        # As of right now, there is a function to edit the wording of a task.  More could be done with more time.
+        # Same story as before with error handling and advanced functions.
+
 @my_view.route("/update/<todo_id>", methods=["POST"])
 def update(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -55,6 +65,8 @@ def update(todo_id):
         message = "Completion undone"
     return redirect(url_for("my_view.home",message=message))
 
+    # An If statement is needed to display two different outcomes of task completion.
+
 @my_view.route("/delete/<todo_id>")
 def delete(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
@@ -62,3 +74,6 @@ def delete(todo_id):
     db.session.commit()
     message = "Task deleted"
     return redirect(url_for("my_view.home",message=message))
+
+    # The deletion route is above.
+    # One thing that would be great to add in the future is a confirmation message, to prevent accidents.
