@@ -67,7 +67,7 @@ def update(todo_id):
 
     # An If statement is needed to display two different outcomes of task completion.
 
-@my_view.route("/delete/<todo_id>")
+@my_view.route("/delete/<todo_id>", methods=["POST"])
 def delete(todo_id):
     todo = Todo.query.filter_by(id=todo_id).first()
     db.session.delete(todo)

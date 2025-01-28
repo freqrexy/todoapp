@@ -27,33 +27,41 @@
     <div>
         <section>
             <div class = "input">
-                <form action="/add" method="post">
-                    <div>
-                        <label>Todo task</label>
-                        <input type="text" name="task" placeholder="Enter a Task">
-                        <label for="category">Task Category</label>
-                        <select id="category" name="category">
-                            <option value="House Chore">House Chore</option>
-                            <option value="Meeting or Visit">Meeting or Visit</option>
-                            <option value="Recreational">Recreational</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <br>
+                <div class = "task-insert">
+                    <h1>Insert Task</h1>
+                    <form action="/add" method="post">
+                        <div>
+                            <label>Todo task</label>
+                            <input type="text" name="task" placeholder="Enter a Task">
+                            <br>
+                            <label for="category">Task Category</label>
+                            <select id="category" name="category">
+                                <option value="House Chore">House Chore</option>
+                                <option value="Meeting or Visit">Meeting or Visit</option>
+                                <option value="Recreational">Recreational</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <br>
 
 <!-- Category selection above is represented by a drop down box, showcasing several pre-selected options.-->
 
-                        <label for="deadlinetrue"> Deadline?</label>
-                        <input type="checkbox" id="deadlinetrue" name="deadlinetrue" value="true" onclick="EnableDisableTextBox(this)">
-                        <input type="date" id="deadline" name="deadline" disabled="disabled" />
+                            <label for="deadlinetrue"> Deadline?</label>
+                            <input type="checkbox" id="deadlinetrue" name="deadlinetrue" value="true" onclick="EnableDisableTextBox(this)">
+                            <input type="date" id="deadline" name="deadline" disabled="disabled" />
 
 <!-- As mentioned above, a checkbox combined with a text box operates the Deadline related variables. -->
 
-                        <button class="button" type="submit">Add a Task</button>
-                    </div>
-                    {% if message %}
-                        <p>{{message}}</p>
-                    {% endif %}
-                </form>
+                            <button class="button" type="submit">Add a Task</button>
+                        </div>
+                        {% if message %}
+                            <p>{{message}}</p>
+                        {% endif %}
+                    </form>
+                    <br>
+                </div>
+                <div class="clipboard">
+                    <img src="./static/clipboard.png" alt="Insert your tasks above this image of a clipboard.">
+                </div>
             </div>
 
 <!-- On the right hand page according to the CSS, the task list will display.  -->
@@ -66,40 +74,43 @@
                     {% for todo in todo_list %}
                     <form action="/edit/{{todo.id}}" method="post">
                         <div>
-                            <h2>{{todo.task}}</h2>
-                            <h3>{{todo.category}}</h3>
+                            <h3>{{todo.task}} [{{todo.category}}]</h2>
+                            <p>
                                 {% if todo.complete==False %}
-                            <p>Date allocated: {{todo.date}} ❌</p>
+                            Date allocated: {{todo.date}} ❌ | 
                                     {% else %}
-                            <p>Date allocated: {{todo.date}} ✅</p>
+                            Date allocated: {{todo.date}} ✅ |
                                 {% endif %}
                                 {% if todo.deadlinetrue==False %}
-                            <p>Deadline assigned: ❌</p>
+                            Deadline assigned: ❌
                                 {% else %}
-                            <p>Deadline assigned: {{todo.deadline}}</p>
+                            Deadline assigned: {{todo.deadline}}
                                 {% endif %}
                             <input type="text" name="edit_todo" placeholder="Edit task?">
                             <button class="button" type="submit">Edit</button>
+                            </p>
                         </div>
                     </form>
 
 <!-- All tasks are listed via this For loop here.  Presentation would depend entirely on the CSS coding.  -->
 
-                    <div>
+                    <div class="edit-buttons">
                         {% if todo.complete==False %}
                             <form action="/update/{{todo.id}}" method="post">
-                                <button class="button" type="submit">Mark as complete</button>
+                                <button class="button-update" type="submit">Mark as complete</button>
                             </form>
                         {% else %}
                         <form action="/update/{{todo.id}}" method="post">
-                            <button class="button" type="submit">Undo complete</button>
+                            <button class="button-update" type="submit">Undo complete</button>
                         </form>
                         {% endif %}
-                    </div>
 
 <!-- There is some accident handling with the Undo button, in case one thinks they've done a task but actually had not.-->
 
-                    <p><a href="/delete/{{todo.id}}">Delete Task?</a></p>
+                        <form action="/delete/{{todo.id}}" method="post">
+                        <button class="button-delete" type="submit">Delete Task</button>
+                        </form>
+                    </div>
                     {% endfor %}
                 </div>
             </div>
